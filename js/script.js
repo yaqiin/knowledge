@@ -280,6 +280,39 @@ const scrollToSurah = (group, container) => {
   });
 };
 
+// 1. Helper to fetch font as Base64 (Essential for the font to appear in the download)
+const getFontBase64 = async () => {
+  try {
+    const cssResponse = await fetch('https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap');
+    const cssText = await cssResponse.text();
+    
+    // Find the woff2 URL
+    const urlMatch = cssText.match(/url\((https:\/\/fonts\.gstatic\.com\/[^)]+)\)/);
+    if (!urlMatch) return '';
+    
+    const fontResponse = await fetch(urlMatch[1]);
+    const fontBlob = await fontResponse.blob();
+    
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(`
+          @font-face {
+            font-family: 'Tajawal';
+            font-style: normal;
+            font-weight: 700; 
+            src: url('${reader.result}') format('woff2');
+          }
+        `);
+      };
+      reader.readAsDataURL(fontBlob);
+    });
+  } catch (e) {
+    console.warn('Font loading failed, using fallback.', e);
+    return '';
+  }
+};
+
 const setupDownload = (els, svg) => {
   const showPanel = () => {
     els.downloadPanel.classList.add('active');
@@ -391,11 +424,15 @@ const setupDownload = (els, svg) => {
   els.customConfirm.addEventListener('click', validateAndDownload);
 };
 
-const downloadImage = (w, h, svg, fileType = 'png') => {
+// Updated to be async to handle font loading
+const downloadImage = async (w, h, svg, fileType = 'png') => {
   if (!svg) return;
 
+  // 2. Load the font before starting the download process
+  const fontCss = await getFontBase64();
+
   if (fileType === 'svg') {
-    downloadSVG(svg, w, h);
+    downloadSVG(svg, w, h, fontCss);
     return;
   }
 
@@ -406,7 +443,8 @@ const downloadImage = (w, h, svg, fileType = 'png') => {
   
   const { scaledWidth, scaledHeight, x, y } = calculateImageDimensions(w, h, svg);
   
-  prepareSVGForDownload(cloned, svg, scaledWidth, scaledHeight);
+  // Pass fontCss to the helper
+  prepareSVGForDownload(cloned, svg, scaledWidth, scaledHeight, fontCss);
   renderAndDownload(cloned, w, h, x, y, scaledWidth, scaledHeight, fileType);
 };
 
@@ -416,7 +454,7 @@ const calculateImageDimensions = (w, h, svg) => {
   const ratio = vw / vh;
   const targetRatio = w / h;
   
-  const padding = 5;
+  const padding = 50;
   const availableWidth = w - padding * 2;
   const availableHeight = h - padding * 2;
   
@@ -437,7 +475,7 @@ const calculateImageDimensions = (w, h, svg) => {
   };
 };
 
-const prepareSVGForDownload = (cloned, original, width, height) => {
+const prepareSVGForDownload = (cloned, original, width, height, fontCss = '') => {
   const viewBox = original.getAttribute('viewBox') || '0 0 1080 1920';
   
   cloned.removeAttribute('style');
@@ -447,7 +485,9 @@ const prepareSVGForDownload = (cloned, original, width, height) => {
   cloned.setAttribute('viewBox', viewBox);
   
   const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+  // 3. Inject the fontCss variable
   style.textContent = `
+    ${fontCss}
     .surah-path { fill: #ffffff; }
     .surah-path.active { fill: #e63946; }
     .surah-name { fill: #000000; font-family: 'Tajawal', Arial, sans-serif; font-size: 14px; font-weight: bold; pointer-events: none; user-select: none; }
@@ -506,7 +546,7 @@ const renderAndDownload = (clonedSVG, canvasWidth, canvasHeight, x, y, imgWidth,
 
     canvas.toBlob(blob => {
           const link = document.createElement('a');
-      link.download = `صورة-القرأن-${canvasWidth}x${canvasHeight}.${extension}`;
+      link.download = `صورة-القرآن-${canvasWidth}x${canvasHeight}.${extension}`;
           link.href = URL.createObjectURL(blob);
           link.click();
           URL.revokeObjectURL(link.href);
@@ -518,7 +558,7 @@ const renderAndDownload = (clonedSVG, canvasWidth, canvasHeight, x, y, imgWidth,
       img.src = url;
 };
 
-const downloadSVG = (svg, width, height) => {
+const downloadSVG = (svg, width, height, fontCss = '') => {
   const cloned = svg.cloneNode(true);
   cloned.style.transform = 'none';
   cloned.style.width = '';
@@ -543,7 +583,9 @@ const downloadSVG = (svg, width, height) => {
   const colorValue = colorsConfig[savedColor] || colorsConfig['gradient-1'] || colorsConfig[Object.keys(colorsConfig)[0]] || '#1a1f2e';
   
   const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+  // 4. Inject the fontCss variable
   style.textContent = `
+    ${fontCss}
     .surah-path { fill: #ffffff; }
     .surah-path.active { fill: #e63946; }
     .surah-name { fill: #000000; font-family: 'Tajawal', Arial, sans-serif; font-size: 14px; font-weight: bold; pointer-events: none; user-select: none; }
@@ -607,7 +649,7 @@ const downloadSVG = (svg, width, height) => {
   const url = URL.createObjectURL(blob);
   
   const link = document.createElement('a');
-  link.download = `صورة-القرأن-${width}x${height}.svg`;
+  link.download = `صورة-القرآن-${width}x${height}.svg`;
   link.href = url;
   link.click();
   URL.revokeObjectURL(url);
