@@ -22,7 +22,6 @@ export function Footer() {
               </li>
             ))}
             <li><a href={LINKS.quran} className="transition hover:text-emerald-800">القرآن الكريم</a></li>
-            <li><a href={LINKS.sudur} className="transition hover:text-emerald-800">في صدور</a></li>
           </ul>
         </div>
 

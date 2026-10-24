@@ -1,5 +1,6 @@
-import { ArrowLeft, ArrowUpLeft, BookOpen, BookOpenText, Heart, Landmark, Wrench } from "lucide-react";
+import { ArrowLeft, ArrowUpLeft, BookHeart, BookOpen, BookOpenText, Landmark, MapPin, Wrench } from "lucide-react";
 import Link from "next/link";
+import { COLLECTIONS } from "@/app/memorization/collections";
 import { GeometricPattern } from "@/components/GeometricPattern";
 import { HolyPlaceCard } from "@/components/HolyPlaceCard";
 import { arabicCount, books, holyPlaces, tools } from "@/lib/data";
@@ -30,11 +31,21 @@ const SECTIONS = [
     count: arabicCount(tools.length, { one: "أداة واحدة", two: "أداتان", few: "أدوات", many: "أداة" }),
     accent: "from-sky-500 to-sky-700",
   },
+  {
+    href: "/memorization/",
+    icon: BookHeart,
+    title: "محفوظاتي",
+    description: "تابع ما حفظته من القرآن الكريم سورةً سورة، وشارك تقدمك صورةً جميلة.",
+    count: COLLECTIONS.length === 1
+      ? COLLECTIONS[0].title
+      : arabicCount(COLLECTIONS.length, { one: "مجموعة واحدة", two: "مجموعتان", few: "مجموعات", many: "مجموعة" }),
+    accent: "from-rose-500 to-rose-700",
+  },
 ];
 
 const EXTERNAL = [
   { href: LINKS.quran, icon: BookOpenText, title: "القرآن الكريم", description: "منصة لقراءة القرآن الكريم بتجربة سلسة وسريعة." },
-  { href: LINKS.sudur, icon: Heart, title: "في صدور", description: "قلب تفاعلي مصمم من سور القرآن الكريم." },
+  { href: LINKS.yaqiin, icon: MapPin, title: "يقين للمساجد", description: "اعرف أين تُقام الدروس وحلقات التحفيظ في مساجد منطقتك." },
 ];
 
 export default function Home() {
@@ -58,12 +69,12 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="container mx-auto mt-14 grid gap-6 px-4 sm:px-6 md:grid-cols-3">
+        <div className="container mx-auto mt-14 grid gap-6 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
           {SECTIONS.map(({ href, icon: Icon, title, description, count, accent }) => (
             <Link
               key={href}
               href={href}
-              className="group relative overflow-hidden rounded-3xl border border-emerald-900/5 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              className="group relative overflow-hidden rounded-3xl border border-emerald-900/5 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
               <div className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} text-white shadow-lg`}>
                 <Icon className="h-7 w-7" />

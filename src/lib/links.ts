@@ -2,7 +2,6 @@
 export const LINKS = {
   yaqiin: "https://yaqiin.org",
   quran: "https://quran.yaqiin.org",
-  sudur: "https://sudur.yaqiin.org",
   github: "https://github.com/yaqiin",
   contact: "mailto:contact@yaqiin.org",
 } as const;
@@ -19,4 +18,5 @@ export const NAV_LINKS = [
   { href: "/library/", label: "المكتبة" },
   { href: "/holy-places/", label: "المقدسات" },
   { href: "/tools/", label: "الأدوات" },
+  { href: "/memorization/", label: "محفوظاتي" },
 ] as const;

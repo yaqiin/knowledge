@@ -3,7 +3,7 @@
 import { BookOpenText, Download } from "lucide-react";
 import { useMemo, useState } from "react";
 import { CategoryChips, EmptyState, SearchInput, matches } from "@/components/Filters";
-import type { Book } from "@/lib/data";
+import { formatNumber, type Book } from "@/lib/data";
 
 export function LibraryBrowser({ books, categories }: { books: Book[]; categories: string[] }) {
   const [query, setQuery] = useState("");
@@ -90,7 +90,7 @@ function BookCard({ book }: { book: Book }) {
           {book.pages ? (
             <span className="inline-flex items-center gap-1.5 text-sm text-emerald-900/60">
               <BookOpenText className="h-4 w-4" />
-              {book.pages.toLocaleString("ar-DZ")} صفحة
+              {formatNumber(book.pages)} صفحة
             </span>
           ) : <span />}
           {book.downloadLink ? (

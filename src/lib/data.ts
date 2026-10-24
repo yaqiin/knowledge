@@ -46,10 +46,26 @@ export function uniqueValues(values: (string | null)[]): string[] {
 }
 
 /**
+ * Groups thousands ("10254" → "10,254") the same way on the server and in every browser.
+ * Don't use toLocaleString in rendered output: Node and browsers ship different locale data
+ * (e.g. "ar-DZ" gives "10.254" in Node but "١٠٬٢٥٤" in Chrome), which breaks hydration.
+ */
+export function formatNumber(n: number): string {
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+/**
  * Arabic count phrase following number–noun agreement:
  * 1 → "كتاب واحد", 2 → "كتابان", 3–10 → "5 كتب", 11+ → "12 كتاباً".
  */
-export function arabicCount(n: number, forms: { one: string; two: string; few: string; many: string }): string {
+export interface CountForms {
+  one: string;
+  two: string;
+  few: string;
+  many: string;
+}
+
+export function arabicCount(n: number, forms: CountForms): string {
   if (n === 1) return forms.one;
   if (n === 2) return forms.two;
   const mod100 = n % 100;
