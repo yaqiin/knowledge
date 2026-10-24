@@ -6,10 +6,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://knowledge.yaqiin.org"),
   title: {
-    default: "يقين للمعرفة - مكتبة، مقدسات، وأدوات للمسلم",
+    default: "يقين للمعرفة - مكتبة، معالم، وأدوات للمسلم",
     template: "%s | يقين للمعرفة",
   },
-  description: "كتب إسلامية للتحميل مجاناً، تعريف بالمقدسات والمعالم الإسلامية، وأدوات مفيدة للمسلم ولطالب العلم.",
+  description: "كتب إسلامية للتحميل مجاناً، تعريف بالمعالم الإسلامية، وأدوات مفيدة للمسلم ولطالب العلم.",
   icons: { icon: "/favicon.svg" },
   openGraph: { siteName: "يقين للمعرفة", locale: "ar_DZ", type: "website" },
 };

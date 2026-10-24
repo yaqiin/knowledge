@@ -16,7 +16,7 @@ export const SOCIAL_LINKS = [
 
 export const NAV_LINKS = [
   { href: "/library/", label: "المكتبة" },
-  { href: "/holy-places/", label: "المقدسات" },
+  { href: "/places/", label: "المعالم" },
   { href: "/tools/", label: "الأدوات" },
   { href: "/memorization/", label: "محفوظاتي" },
 ] as const;

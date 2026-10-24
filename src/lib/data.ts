@@ -1,5 +1,5 @@
 import booksJson from "@/data/books.json";
-import holyPlacesJson from "@/data/holy-places.json";
+import placesJson from "@/data/places.json";
 import toolsJson from "@/data/tools.json";
 
 export interface Book {
@@ -13,7 +13,7 @@ export interface Book {
   categories: string[];
 }
 
-export interface HolyPlace {
+export interface Place {
   slug: string;
   name: string;
   location: string;
@@ -33,11 +33,11 @@ export interface Tool {
 }
 
 export const books: Book[] = booksJson;
-export const holyPlaces: HolyPlace[] = holyPlacesJson;
+export const places: Place[] = placesJson;
 export const tools: Tool[] = toolsJson;
 
-export function getHolyPlace(slug: string): HolyPlace | undefined {
-  return holyPlaces.find(place => place.slug === slug);
+export function getPlace(slug: string): Place | undefined {
+  return places.find(place => place.slug === slug);
 }
 
 /** Distinct, non-empty values in first-seen order. */

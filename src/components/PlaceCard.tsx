@@ -1,11 +1,11 @@
 import { MapPin } from "lucide-react";
 import Link from "next/link";
-import { excerpt, type HolyPlace } from "@/lib/data";
+import { excerpt, type Place } from "@/lib/data";
 
-export function HolyPlaceCard({ place }: { place: HolyPlace }) {
+export function PlaceCard({ place }: { place: Place }) {
   return (
     <Link
-      href={`/holy-places/${place.slug}/`}
+      href={`/places/${place.slug}/`}
       className="group overflow-hidden rounded-3xl border border-emerald-900/5 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-emerald-100">

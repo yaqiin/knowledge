@@ -2,8 +2,8 @@ import { ArrowLeft, ArrowUpLeft, BookHeart, BookOpen, BookOpenText, Landmark, Ma
 import Link from "next/link";
 import { COLLECTIONS } from "@/app/memorization/collections";
 import { GeometricPattern } from "@/components/GeometricPattern";
-import { HolyPlaceCard } from "@/components/HolyPlaceCard";
-import { arabicCount, books, holyPlaces, tools } from "@/lib/data";
+import { PlaceCard } from "@/components/PlaceCard";
+import { arabicCount, books, places, tools } from "@/lib/data";
 import { LINKS } from "@/lib/links";
 
 const SECTIONS = [
@@ -16,11 +16,11 @@ const SECTIONS = [
     accent: "from-emerald-500 to-emerald-700",
   },
   {
-    href: "/holy-places/",
+    href: "/places/",
     icon: Landmark,
-    title: "المقدسات والمعالم",
+    title: "المعالم الإسلامية",
     description: "تعرّف على تاريخ المساجد الكبرى والمعالم الإسلامية حول العالم.",
-    count: arabicCount(holyPlaces.length, { one: "معلم واحد", two: "معلمان", few: "معالم", many: "معلماً" }),
+    count: arabicCount(places.length, { one: "معلم واحد", two: "معلمان", few: "معالم", many: "معلماً" }),
     accent: "from-amber-400 to-amber-600",
   },
   {
@@ -65,7 +65,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-emerald-900/70">
-            مكتبة كتب مجانية، تعريف بالمقدسات والمعالم الإسلامية، وأدوات مختارة تعينك على التعلم.
+            مكتبة كتب مجانية، تعريف بالمعالم الإسلامية، وأدوات مختارة تعينك على التعلم.
           </p>
         </div>
 
@@ -95,14 +95,14 @@ export default function Home() {
 
       <section className="container mx-auto px-4 py-12 sm:px-6">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="font-display text-2xl font-bold text-emerald-950 sm:text-3xl">من المقدسات والمعالم</h2>
-          <Link href="/holy-places/" className="shrink-0 text-sm font-semibold text-emerald-700 hover:underline">
+          <h2 className="font-display text-2xl font-bold text-emerald-950 sm:text-3xl">من المعالم الإسلامية</h2>
+          <Link href="/places/" className="shrink-0 text-sm font-semibold text-emerald-700 hover:underline">
             عرض الكل
           </Link>
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {holyPlaces.slice(0, 3).map(place => (
-            <HolyPlaceCard key={place.slug} place={place} />
+          {places.slice(0, 3).map(place => (
+            <PlaceCard key={place.slug} place={place} />
           ))}
         </div>
       </section>

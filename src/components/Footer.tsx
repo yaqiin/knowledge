@@ -9,7 +9,7 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-emerald-900/60">
-            جزء من منظومة يقين لخدمة المساجد والمجتمع الإسلامي.
+            جزء من منظومة يقين لخدمة المجتمع الإسلامي.
           </p>
         </div>
 

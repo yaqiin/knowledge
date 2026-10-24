@@ -3,18 +3,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-import { HolyPlaceCard } from "@/components/HolyPlaceCard";
-import { excerpt, getHolyPlace, holyPlaces } from "@/lib/data";
+import { PlaceCard } from "@/components/PlaceCard";
+import { excerpt, getPlace, places } from "@/lib/data";
 import { ImageGallery } from "./ImageGallery";
 
 type Params = Promise<{ slug: string }>;
 
 export function generateStaticParams() {
-  return holyPlaces.map(place => ({ slug: place.slug }));
+  return places.map(place => ({ slug: place.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const place = getHolyPlace((await params).slug);
+  const place = getPlace((await params).slug);
   if (!place) return {};
   const description = excerpt(place.description);
   return {
@@ -24,17 +24,17 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function HolyPlacePage({ params }: { params: Params }) {
-  const place = getHolyPlace((await params).slug);
+export default async function PlacePage({ params }: { params: Params }) {
+  const place = getPlace((await params).slug);
   if (!place) notFound();
 
-  const others = holyPlaces.filter(p => p.slug !== place.slug).slice(0, 3);
+  const others = places.filter(p => p.slug !== place.slug).slice(0, 3);
 
   return (
     <article className="container mx-auto px-4 py-10 sm:px-6">
-      <Link href="/holy-places/" className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 hover:underline">
+      <Link href="/places/" className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 hover:underline">
         <ChevronRight className="h-4 w-4" />
-        كل المقدسات والمعالم
+        كل المعالم
       </Link>
 
       <header className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -70,7 +70,7 @@ export default async function HolyPlacePage({ params }: { params: Params }) {
         <section className="mt-20">
           <h2 className="font-display text-2xl font-bold text-emerald-950">معالم أخرى</h2>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {others.map(other => <HolyPlaceCard key={other.slug} place={other} />)}
+            {others.map(other => <PlaceCard key={other.slug} place={other} />)}
           </div>
         </section>
       )}

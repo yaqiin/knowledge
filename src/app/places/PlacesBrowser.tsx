@@ -2,10 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { EmptyState, SearchInput, matches } from "@/components/Filters";
-import { HolyPlaceCard } from "@/components/HolyPlaceCard";
-import type { HolyPlace } from "@/lib/data";
+import { PlaceCard } from "@/components/PlaceCard";
+import type { Place } from "@/lib/data";
 
-export function HolyPlacesBrowser({ places }: { places: HolyPlace[] }) {
+export function PlacesBrowser({ places }: { places: Place[] }) {
   const [query, setQuery] = useState("");
 
   const results = useMemo(
@@ -18,7 +18,7 @@ export function HolyPlacesBrowser({ places }: { places: HolyPlace[] }) {
       <SearchInput value={query} onChange={setQuery} placeholder="ابحث باسم المكان أو البلد..." />
       {results.length ? (
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {results.map(place => <HolyPlaceCard key={place.slug} place={place} />)}
+          {results.map(place => <PlaceCard key={place.slug} place={place} />)}
         </div>
       ) : (
         <div className="mt-8"><EmptyState onReset={() => setQuery("")} /></div>

@@ -35,8 +35,8 @@ export const SITE_COLORS: HeartPalette = {
 
 /** Preset colours for memorized surahs in the downloaded image (any colour can also be picked). */
 export const HIGHLIGHTS = [
-  { label: "ذهبي", color: "#fbbf24" },
   { label: "أحمر", color: "#e63946" },
+  { label: "ذهبي", color: "#fbbf24" },
   { label: "أخضر", color: "#10b981" },
   { label: "أزرق", color: "#38bdf8" },
   { label: "بنفسجي", color: "#a78bfa" },
@@ -70,11 +70,11 @@ export interface Background {
 }
 
 export const BACKGROUNDS: Background[] = [
+  { id: "violet", label: "بنفسجي", stops: ["#2d1b3d", "#8b5a9f", "#2d1b3d"] },
   { id: "emerald", label: "زمردي", stops: ["#022c22", "#065f46", "#022c22"] },
-  { id: "night", label: "ليلي", stops: ["#1a1f2e", "#2d1b3d", "#1a1f2e"] },
   { id: "ocean", label: "محيطي", stops: ["#0f2027", "#203a43", "#2c5364"] },
   { id: "royal", label: "ملكي", stops: ["#1e3c72", "#2a5298", "#1e3c72"] },
-  { id: "violet", label: "بنفسجي", stops: ["#2d1b3d", "#8b5a9f", "#2d1b3d"] },
+  { id: "night", label: "ليلي", stops: ["#1a1f2e", "#2d1b3d", "#1a1f2e"] },
   { id: "navy", label: "كحلي", stops: ["#1a1a2e", "#16213e", "#0f3460"] },
   { id: "earth", label: "ترابي", stops: ["#2c1810", "#8b4513", "#2c1810"] },
   { id: "slate", label: "رمادي", stops: ["#222831"] },
