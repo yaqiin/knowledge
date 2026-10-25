@@ -24,3 +24,10 @@ All content is in `src/data/`:
 | `quran-heart.json` | Shapes of the Quran heart in محفوظاتي (see below); not meant to be edited by hand |
 
 Images are hosted in the [`yaqiin/assets`](https://github.com/yaqiin/assets) repository. To add an image, push it there and use its `raw.githubusercontent.com` URL.
+
+## Contribution 🤝
+
+Read the guideline: [CONTRIBUTING.md](../../Naseej/discover/discover-api/CONTRIBUTING.md).
+
+### Notes:
+- The Quran Heart svg file is taken and the idea is inspired from this project: [The Quran Heart](https://github.com/maro-medhat/The-Quran-Heart)
