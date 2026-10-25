@@ -27,7 +27,7 @@ Images are hosted in the [`yaqiin/assets`](https://github.com/yaqiin/assets) rep
 
 ## Contribution 🤝
 
-Read the guideline: [CONTRIBUTING.md](../../Naseej/discover/discover-api/CONTRIBUTING.md).
+Read the guideline: [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ### Notes:
 - The Quran Heart svg file is taken and the idea is inspired from this project: [The Quran Heart](https://github.com/maro-medhat/The-Quran-Heart)
