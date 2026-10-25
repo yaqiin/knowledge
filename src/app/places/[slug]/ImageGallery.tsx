@@ -1,13 +1,27 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function ImageGallery({ images, alt }: { images: string[]; alt: string }) {
   const [index, setIndex] = useState(0);
+  const stripRef = useRef<HTMLDivElement>(null);
+  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
   // In RTL, "next" moves visually leftwards
   const next = () => setIndex(i => (i + 1) % images.length);
   const prev = () => setIndex(i => (i - 1 + images.length) % images.length);
+
+  // Keep the active thumbnail centred in the strip. Scrolls only the strip (not the page, unlike
+  // scrollIntoView); scrollBy is relative, so it behaves the same in RTL and LTR.
+  useEffect(() => {
+    const strip = stripRef.current;
+    const thumb = thumbRefs.current[index];
+    if (!strip || !thumb) return;
+    const stripBox = strip.getBoundingClientRect();
+    const thumbBox = thumb.getBoundingClientRect();
+    const offset = thumbBox.left + thumbBox.width / 2 - (stripBox.left + stripBox.width / 2);
+    strip.scrollBy({ left: offset, behavior: "smooth" });
+  }, [index]);
 
   if (!images.length) return null;
 
@@ -51,10 +65,12 @@ export function ImageGallery({ images, alt }: { images: string[]; alt: string })
       </div>
 
       {images.length > 1 && (
-        <div className="mt-4 flex gap-3 overflow-x-auto pb-1">
+        // Padding leaves room for the active thumbnail's ring, which the scroll area would otherwise clip
+        <div ref={stripRef} className="mt-3 flex gap-3 overflow-x-auto p-1.5">
           {images.map((image, i) => (
             <button
               key={image}
+              ref={el => { thumbRefs.current[i] = el; }}
               type="button"
               onClick={() => setIndex(i)}
               aria-label={`عرض الصورة ${i + 1}`}
