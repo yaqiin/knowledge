@@ -1,3 +1,4 @@
+import { saveBlob } from "@/lib/download";
 import { HEART, SURAH_NAMES, exportPalette, type Background, type HeartPalette } from "./heart";
 
 export type FileType = "png" | "jpg" | "svg";
@@ -30,16 +31,6 @@ function fit(w: number, h: number) {
   return { width, height, x: (w - width) / 2, y: (h - height) / 2 };
 }
 
-function save(blob: Blob, filename: string) {
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = filename;
-  link.click();
-  // Give the browser time to start the download before releasing the blob
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
 const filename = (w: number, h: number, ext: string) => `محفوظاتي-القرآن-${w}x${h}.${ext}`;
 
 function downloadSvg(w: number, h: number, memorized: Set<string>, background: Background, palette: HeartPalette) {
@@ -58,7 +49,7 @@ function downloadSvg(w: number, h: number, memorized: Set<string>, background: B
   const fill = background.stops.length > 1 ? "url(#bg)" : background.stops[0];
   const rect = `<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="${fill}"/>`;
   const markup = heartMarkup(memorized, palette, `width="${w}" height="${h}"`, gradient + rect);
-  save(new Blob([markup], { type: "image/svg+xml;charset=utf-8" }), filename(w, h, "svg"));
+  saveBlob(new Blob([markup], { type: "image/svg+xml;charset=utf-8" }), filename(w, h, "svg"));
 }
 
 function downloadRaster(w: number, h: number, type: "jpg" | "png", memorized: Set<string>, background: Background, palette: HeartPalette) {
@@ -86,7 +77,7 @@ function downloadRaster(w: number, h: number, type: "jpg" | "png", memorized: Se
     ctx.drawImage(img, x, y, width, height);
     URL.revokeObjectURL(svgUrl);
     canvas.toBlob(
-      blob => blob && save(blob, filename(w, h, type)),
+      blob => blob && saveBlob(blob, filename(w, h, type)),
       type === "jpg" ? "image/jpeg" : "image/png",
       type === "jpg" ? 0.92 : 1,
     );

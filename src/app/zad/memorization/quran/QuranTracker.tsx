@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { QURAN } from "../collections";
 import { ItemGrid } from "../components/ItemGrid";
 import { ProgressBar, progressText } from "../components/ProgressBar";
-import { useMemorized } from "../storage";
+import { useMemorized } from "../../storage";
 import { ExportDialog } from "./ExportDialog";
 import { QuranHeart, type QuranHeartHandle } from "./QuranHeart";
 import { SurahSearch } from "./SurahSearch";

@@ -18,5 +18,5 @@ export const NAV_LINKS = [
   { href: "/library/", label: "المكتبة" },
   { href: "/places/", label: "المعالم" },
   { href: "/tools/", label: "الأدوات" },
-  { href: "/memorization/", label: "محفوظاتي" },
+  { href: "/zad/", label: "زادي" },
 ] as const;

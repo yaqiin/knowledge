@@ -3,7 +3,7 @@
 import { ArrowLeft, BookHeart, Clock } from "lucide-react";
 import Link from "next/link";
 import { COLLECTIONS, UPCOMING, collectionHref, type Collection } from "../collections";
-import { useMemorized } from "../storage";
+import { useMemorized } from "../../storage";
 import { ProgressBar, progressText } from "./ProgressBar";
 
 export function CollectionCards() {

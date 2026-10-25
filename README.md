@@ -1,6 +1,6 @@
 # يقين للمعرفة · Yaqiin Knowledge
 
-The Yaqiin knowledge site: a free Islamic e-book **library**, Islamic **landmarks** (المعالم), curated **tools** for Muslims and students of knowledge, and **محفوظاتي**, a memorization tracker (starting with the Quran).
+The Yaqiin knowledge site: a free Islamic e-book **library**, Islamic **landmarks** (المعالم), curated **tools** for Muslims and students of knowledge, and **زادي** (`/zad/`): a memorization tracker (starting with the Quran) and a printable habit sheet (PDF or image).
 
 It is a **fully static site** (Next.js `output: "export"`): no backend, no database. Content lives in JSON files in the repo, and every page is pre-rendered HTML.
 
@@ -21,7 +21,9 @@ All content is in `src/data/`:
 | `books.json` | Library books: title, authors, description, pages, cover URL, download link, categories |
 | `places.json` | Islamic landmarks (المعالم, at `/places/`): `slug` (used in the URL), name, location, Google Maps link, **Markdown** description, images (the first one is the cover) |
 | `tools.json` | Tools: name, description, link, category |
-| `quran-heart.json` | Shapes of the Quran heart in محفوظاتي (see below); not meant to be edited by hand |
+| `quran-heart.json` | Shapes of the Quran heart in زادي → محفوظاتي; not meant to be edited by hand |
+
+The habit sheet's suggested habits are in `src/app/zad/habits/presets.ts`.
 
 Images are hosted in the [`yaqiin/assets`](https://github.com/yaqiin/assets) repository. To add an image, push it there and use its `raw.githubusercontent.com` URL.
 

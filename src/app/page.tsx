@@ -1,6 +1,5 @@
 import { ArrowLeft, ArrowUpLeft, BookHeart, BookOpen, BookOpenText, Landmark, MapPin, Wrench } from "lucide-react";
 import Link from "next/link";
-import { COLLECTIONS } from "@/app/memorization/collections";
 import { GeometricPattern } from "@/components/GeometricPattern";
 import { PlaceCard } from "@/components/PlaceCard";
 import { arabicCount, books, places, tools } from "@/lib/data";
@@ -32,13 +31,11 @@ const SECTIONS = [
     accent: "from-sky-500 to-sky-700",
   },
   {
-    href: "/memorization/",
+    href: "/zad/",
     icon: BookHeart,
-    title: "محفوظاتي",
-    description: "تابع ما حفظته من القرآن الكريم سورةً سورة، وشارك تقدمك صورةً جميلة.",
-    count: COLLECTIONS.length === 1
-      ? COLLECTIONS[0].title
-      : arabicCount(COLLECTIONS.length, { one: "مجموعة واحدة", two: "مجموعتان", few: "مجموعات", many: "مجموعة" }),
+    title: "زادي",
+    description: "تابع حفظك للقرآن الكريم، وأنشئ جدولاً لعاداتك اليومية جاهزاً للطباعة.",
+    count: "الحفظ والعادات",
     accent: "from-rose-500 to-rose-700",
   },
 ];

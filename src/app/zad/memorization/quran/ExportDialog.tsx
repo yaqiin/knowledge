@@ -4,7 +4,7 @@ import { Download, Pipette, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { formatNumber } from "@/lib/data";
 import { useDismiss } from "@/lib/useDismiss";
-import { readStorage, writeStorage } from "../storage";
+import { readStorage, writeStorage } from "../../storage";
 import { downloadHeart, type FileType } from "./download";
 import {
   BACKGROUNDS, DEFAULT_HIGHLIGHT, HIGHLIGHTS, backgroundCss, exportPalette, isHexColor, type Background,
@@ -22,8 +22,8 @@ type SizeId = (typeof SIZES)[number]["id"];
 
 const MIN_SIZE = 100;
 const MAX_SIZE = 10000;
-const BACKGROUND_KEY = "export-background";
-const HIGHLIGHT_KEY = "export-highlight";
+const BACKGROUND_KEY = "memorization:export-background";
+const HIGHLIGHT_KEY = "memorization:export-highlight";
 
 export function ExportDialog({ memorized, onClose }: { memorized: Set<string>; onClose: () => void }) {
   const [background, setBackground] = useState<Background>(BACKGROUNDS[0]);

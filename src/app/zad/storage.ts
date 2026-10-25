@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-const PREFIX = "yaqiin:memorization:";
+// Keys look like "yaqiin:memorization:quran" or "yaqiin:habits"
+const PREFIX = "yaqiin:";
 
 // localStorage can throw (private mode, blocked storage); the pages must still work without it
 export function readStorage(key: string): string | null {
@@ -21,9 +22,11 @@ export function writeStorage(key: string, value: string) {
   }
 }
 
+const memorizationKey = (slug: string) => `memorization:${slug}`;
+
 function readIds(slug: string): Set<string> {
   try {
-    const saved = JSON.parse(readStorage(slug) ?? "[]");
+    const saved = JSON.parse(readStorage(memorizationKey(slug)) ?? "[]");
     return new Set(Array.isArray(saved) ? saved.filter((id): id is string => typeof id === "string") : []);
   } catch {
     return new Set();
@@ -43,7 +46,7 @@ export function useMemorized(slug: string) {
     setMemorized(readIds(slug));
     setLoaded(true);
     const onStorage = (e: StorageEvent) => {
-      if (e.key === PREFIX + slug) setMemorized(readIds(slug));
+      if (e.key === PREFIX + memorizationKey(slug)) setMemorized(readIds(slug));
     };
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
@@ -51,7 +54,7 @@ export function useMemorized(slug: string) {
 
   const update = useCallback((next: Set<string>) => {
     setMemorized(next);
-    writeStorage(slug, JSON.stringify([...next]));
+    writeStorage(memorizationKey(slug), JSON.stringify([...next]));
   }, [slug]);
 
   const toggle = useCallback((id: string) => {
@@ -59,7 +62,7 @@ export function useMemorized(slug: string) {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
-      writeStorage(slug, JSON.stringify([...next]));
+      writeStorage(memorizationKey(slug), JSON.stringify([...next]));
       return next;
     });
   }, [slug]);

@@ -9,7 +9,7 @@ export interface MemorizationItem {
 
 /**
  * A set of texts a visitor can track memorizing (the Quran, an-Nawawi's forty hadith, …).
- * To add one: give it items, register it here, and create `app/memorization/<slug>/page.tsx`
+ * To add one: give it items, register it here, and create `app/zad/memorization/<slug>/page.tsx`
  * (the generic `ItemGrid` works for any collection; the Quran additionally has the heart view).
  */
 export interface Collection {
@@ -40,4 +40,4 @@ export const UPCOMING = [
   { title: "كتب الحديث", description: "تابع حفظك لأحاديث رياض الصالحين، وعمدة الأحكام، وغيرها." },
 ];
 
-export const collectionHref = (slug: string) => `/memorization/${slug}/`;
+export const collectionHref = (slug: string) => `/zad/memorization/${slug}/`;
