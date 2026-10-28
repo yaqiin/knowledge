@@ -42,6 +42,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <a
             href={LINKS.yaqiin}
+            target={"_blank"}
             className="hidden items-center gap-1 rounded-full border border-emerald-200 px-4 py-2 text-sm font-semibold text-emerald-800 transition hover:bg-emerald-50 sm:inline-flex"
           >
             يقين للمساجد
@@ -75,7 +76,7 @@ export function Navbar() {
             </li>
           ))}
           <li>
-            <a href={LINKS.yaqiin} className="block rounded-xl px-4 py-3 font-medium text-emerald-700 hover:bg-emerald-50">
+            <a href={LINKS.yaqiin} target={"_blank"} className="block rounded-xl px-4 py-3 font-medium text-emerald-700 hover:bg-emerald-50">
               يقين للمساجد ←
             </a>
           </li>

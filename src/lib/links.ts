@@ -10,7 +10,6 @@ export const SOCIAL_LINKS = [
   { label: "فيسبوك", href: "https://facebook.com/yaqiin.org" },
   { label: "إنستغرام", href: "https://instagram.com/yaqiinorg" },
   { label: "إكس", href: "https://x.com/yaqiinorg" },
-  { label: "تيليغرام", href: "https://t.me/+N-7mhIcAExIwNDFk" },
   { label: "غيت هب", href: "https://github.com/yaqiin" },
 ] as const;
 
