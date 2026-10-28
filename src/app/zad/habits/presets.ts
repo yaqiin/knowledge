@@ -1,10 +1,10 @@
 /** Suggested habits; the first DEFAULT_COUNT are selected for first-time visitors. */
 export const PRESET_HABITS = [
+  "صلاة الفجر",
   "ورد القرآن",
   "أذكار الصباح",
   "أذكار المساء",
   "السنن الرواتب",
-  "صلاة الوتر",
   "صلاة الضحى",
   "قيام الليل",
   "الاستغفار",
