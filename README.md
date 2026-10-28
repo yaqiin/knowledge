@@ -1,6 +1,6 @@
 # يقين للمعرفة · Yaqiin Knowledge
 
-The Yaqiin knowledge site: a free Islamic e-book **library**, Islamic **landmarks** (المعالم), curated **tools** for Muslims and students of knowledge, and **زادي** (`/zad/`): a memorization tracker (starting with the Quran), a printable habit sheet, and a printable 90-day challenge (PDF or image).
+The Yaqiin knowledge site: a free Islamic e-book **library**, Islamic **landmarks** (المعالم), curated **tools** for Muslims and students of knowledge, and **زادي**: a memorization tracker (starting with the Quran), and printable planners (PDF or image): a habit sheet, a 90-day challenge, and a wheel of life.
 
 It is a **fully static site** (Next.js `output: "export"`): no backend, no database. Content lives in JSON files in the repo, and every page is pre-rendered HTML.
 

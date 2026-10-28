@@ -77,10 +77,11 @@ export function buildSheet({ title, habits, days, theme }: SheetOptions, fontCss
 
   // Header
   text(width / 2, margin + 40, title.trim() || " ", `text-anchor="middle" font-family="${DISPLAY}" font-size="36" font-weight="700" fill="${C.ink}"`);
-  // Thmanyah Sans draws the Quranic brackets ﴿﴾ as small chevrons; the serif face (also embedded) has clear ones
+  // Thmanyah Sans draws the Quranic brackets ﴿﴾ as small chevrons; the serif face (also embedded) has clear ones.
+  // Pinned to LTR (the standalone export default) so the RTL page does not swap the brackets in the preview
   const bracket = (c: string) => `<tspan font-family="${DISPLAY}" font-weight="700" font-size="17">${c}</tspan>`;
-  parts.push(`<text x="${width / 2}" y="${margin + 74}" text-anchor="middle" font-family="${SANS}" font-size="15" fill="${C.accent}">`
-    + `${bracket("﴾")} وَتَزَوَّدُوا فَإِنَّ خَيْرَ الزَّادِ التَّقْوَى ${bracket("﴿")}</text>`);
+  parts.push(`<text x="${width / 2}" y="${margin + 74}" direction="ltr" text-anchor="middle" font-family="${SANS}" font-size="15" fill="${C.accent}">`
+    + `${bracket("\uFD3E")} وَتَزَوَّدُوا فَإِنَّ خَيْرَ الزَّادِ التَّقْوَى ${bracket("\uFD3F")}</text>`);
 
   // Column header row
   parts.push(`<rect x="${margin}" y="${gridTop}" width="${width - margin * 2}" height="${headerHeight}" rx="10" fill="${C.header}"/>`);

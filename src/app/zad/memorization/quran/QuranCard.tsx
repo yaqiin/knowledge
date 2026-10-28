@@ -15,7 +15,7 @@ export function QuranCard() {
   return (
     <Link
       href={collectionHref(QURAN.slug)}
-      className="group flex items-center gap-4 rounded-3xl border border-emerald-900/5 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl sm:p-5 md:flex-col md:items-stretch md:gap-0"
+      className="group flex items-center gap-4 rounded-3xl border border-emerald-900/5 bg-white p-3 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl sm:p-5 md:flex-col md:items-stretch md:gap-0"
     >
       <QuranHeart memorized={memorized} className="pointer-events-none h-20 w-16 shrink-0 md:mx-auto md:h-28 md:w-full" />
       <span className="flex min-w-0 flex-1 flex-col">
