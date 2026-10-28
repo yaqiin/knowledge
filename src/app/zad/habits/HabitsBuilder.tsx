@@ -1,9 +1,9 @@
 "use client";
 
-import { Check, FileText, ImageIcon, Loader2, Plus, X } from "lucide-react";
+import { Check, Plus, X } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { readStorage, writeStorage } from "../storage";
-import { downloadImage, downloadPdf } from "./export";
+import { DownloadButtons, ThemePicker } from "./controls";
 import {
   DEFAULT_HABITS, DEFAULT_TITLE, MAX_HABIT_LENGTH, MAX_HABITS, PERIODS, PRESET_HABITS, type PeriodDays,
 } from "./presets";
@@ -26,7 +26,6 @@ export function HabitsBuilder() {
   const [title, setTitle] = useState(DEFAULT_TITLE);
   const [theme, setTheme] = useState(DEFAULT_THEME);
   const [draft, setDraft] = useState("");
-  const [busy, setBusy] = useState<"pdf" | "image" | null>(null);
   const [error, setError] = useState("");
   const [loaded, setLoaded] = useState(false);
 
@@ -54,7 +53,6 @@ export function HabitsBuilder() {
   const allHabits = useMemo(() => [...PRESET_HABITS, ...custom], [custom]);
   // Sheet order follows the list order, not the order of tapping
   const habits = useMemo(() => allHabits.filter(h => selected.includes(h)), [allHabits, selected]);
-  const options = { title, habits, days, theme };
   const preview = useMemo(() => buildSheet({ title, habits, days, theme }).markup, [title, habits, days, theme]);
   const full = habits.length >= MAX_HABITS;
 
@@ -88,18 +86,6 @@ export function HabitsBuilder() {
   const removeCustom = (habit: string) => {
     setCustom(prev => prev.filter(h => h !== habit));
     setSelected(prev => prev.filter(h => h !== habit));
-  };
-
-  const download = async (kind: "pdf" | "image") => {
-    setBusy(kind);
-    setError("");
-    try {
-      await (kind === "pdf" ? downloadPdf(options) : downloadImage(options));
-    } catch {
-      setError("تعذّر إنشاء الملف، حاول مرة أخرى.");
-    } finally {
-      setBusy(null);
-    }
   };
 
   return (
@@ -188,30 +174,7 @@ export function HabitsBuilder() {
           </div>
         </div>
 
-        <div>
-          <div className="flex items-baseline justify-between gap-3">
-            <h2 className="font-display text-lg font-bold text-emerald-950">اللون</h2>
-            <span className="text-sm text-emerald-900/50">{THEMES.find(t => t.id === theme)?.label}</span>
-          </div>
-          <div className="mt-3 flex flex-wrap gap-3" role="group" aria-label="لون الجدول">
-            {THEMES.map(t => (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => setTheme(t.id)}
-                aria-pressed={theme === t.id}
-                aria-label={t.label}
-                title={t.label}
-                style={{ background: `linear-gradient(135deg, ${t.header} 50%, ${t.circle} 50%)` }}
-                className={`flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:scale-110 ${
-                  theme === t.id ? "ring-2 ring-emerald-950 ring-offset-2" : ""
-                }`}
-              >
-                {theme === t.id && <Check className="h-4 w-4 drop-shadow" />}
-              </button>
-            ))}
-          </div>
-        </div>
+        <ThemePicker theme={theme} onChange={setTheme} />
 
         <label className="block">
           <span className="font-display text-lg font-bold text-emerald-950">العنوان</span>
@@ -226,25 +189,12 @@ export function HabitsBuilder() {
       </section>
 
       <section className="min-w-0 rounded-3xl border border-emerald-900/5 bg-white p-4 shadow-sm sm:p-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <h2 className="font-display text-lg font-bold text-emerald-950">معاينة الجدول</h2>
-          <div className="flex gap-2">
-            <DownloadButton
-              primary
-              icon={<FileText className="h-4 w-4" />}
-              label="تحميل PDF"
-              busy={busy === "pdf"}
-              disabled={!habits.length || busy !== null}
-              onClick={() => download("pdf")}
-            />
-            <DownloadButton
-              icon={<ImageIcon className="h-4 w-4" />}
-              label="تحميل صورة"
-              busy={busy === "image"}
-              disabled={!habits.length || busy !== null}
-              onClick={() => download("image")}
-            />
-          </div>
+          <DownloadButtons
+            build={habits.length ? fontCss => buildSheet({ title, habits, days, theme }, fontCss) : null}
+            name={title.trim() || "جدول-العادات"}
+          />
         </div>
 
         {error && <p role="alert" className="mt-3 rounded-xl bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>}
@@ -265,30 +215,5 @@ export function HabitsBuilder() {
         </div>
       </section>
     </div>
-  );
-}
-
-function DownloadButton({ primary = false, icon, label, busy, disabled, onClick }: {
-  primary?: boolean;
-  icon: React.ReactNode;
-  label: string;
-  busy: boolean;
-  disabled: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={`inline-flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition disabled:opacity-50 sm:flex-none ${
-        primary
-          ? "bg-emerald-700 text-white shadow-lg shadow-emerald-700/20 hover:bg-emerald-800"
-          : "border border-emerald-900/10 text-emerald-900 hover:bg-emerald-50"
-      }`}
-    >
-      {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : icon}
-      {busy ? "جارٍ التحضير…" : label}
-    </button>
   );
 }

@@ -1,5 +1,8 @@
 import { jpegToPdf, saveBlob } from "@/lib/download";
-import { buildSheet, type SheetOptions } from "./sheet";
+import type { Sheet } from "./sheet";
+
+/** Draws a sheet; receives the embedded @font-face rules it needs to render as an image. */
+export type SheetBuilder = (fontCss: string) => Sheet;
 
 // An SVG drawn into a canvas can't use the page's web fonts, so the sheet embeds them as data URLs
 const FONTS = [
@@ -23,8 +26,8 @@ function embeddedFontCss(): Promise<string> {
 }
 
 /** Renders the sheet onto a canvas `scale` times its CSS size. */
-async function renderSheet(options: SheetOptions, scale: number) {
-  const sheet = buildSheet(options, await embeddedFontCss());
+async function renderSheet(build: SheetBuilder, scale: number) {
+  const sheet = build(await embeddedFontCss());
   const url = URL.createObjectURL(new Blob([sheet.markup], { type: "image/svg+xml;charset=utf-8" }));
   try {
     const img = new Image();
@@ -46,20 +49,20 @@ async function renderSheet(options: SheetOptions, scale: number) {
 const toBlob = (canvas: HTMLCanvasElement, type: string, quality?: number) =>
   new Promise<Blob>((resolve, reject) => canvas.toBlob(b => (b ? resolve(b) : reject(new Error("canvas export failed"))), type, quality));
 
-const fileName = (options: SheetOptions, ext: string) =>
-  `${(options.title.trim() || "جدول-العادات").replace(/[\\/:*?"<>|\s]+/g, "-")}.${ext}`;
+const fileName = (name: string, ext: string) =>
+  `${name.replace(/[\\/:*?"<>|\s]+/g, "-")}.${ext}`;
 
-export async function downloadImage(options: SheetOptions) {
-  const { canvas } = await renderSheet(options, 2);
-  saveBlob(await toBlob(canvas, "image/png"), fileName(options, "png"));
+export async function downloadImage(build: SheetBuilder, name: string) {
+  const { canvas } = await renderSheet(build, 2);
+  saveBlob(await toBlob(canvas, "image/png"), fileName(name, "png"));
 }
 
 const A4 = { short: 595.28, long: 841.89 };
 
-export async function downloadPdf(options: SheetOptions) {
+export async function downloadPdf(build: SheetBuilder, name: string) {
   // ~290 dpi on A4: sharp when printed
-  const { canvas, sheet } = await renderSheet(options, 3);
+  const { canvas, sheet } = await renderSheet(build, 3);
   const jpeg = new Uint8Array(await (await toBlob(canvas, "image/jpeg", 0.92)).arrayBuffer());
   const [pageWidth, pageHeight] = sheet.landscape ? [A4.long, A4.short] : [A4.short, A4.long];
-  saveBlob(jpegToPdf(jpeg, canvas.width, canvas.height, pageWidth, pageHeight), fileName(options, "pdf"));
+  saveBlob(jpegToPdf(jpeg, canvas.width, canvas.height, pageWidth, pageHeight), fileName(name, "pdf"));
 }

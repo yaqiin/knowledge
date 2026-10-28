@@ -18,7 +18,7 @@ export interface Sheet {
   landscape: boolean;
 }
 
-interface Theme {
+export interface Theme {
   id: string;
   label: string;
   ink: string;
@@ -44,14 +44,16 @@ export const THEMES: Theme[] = [
 
 export const DEFAULT_THEME = THEMES[0].id;
 
-const SANS = "'Thmanyah Sans', Tahoma, Arial, sans-serif";
-const DISPLAY = "'Thmanyah Serif Display', 'Thmanyah Sans', Tahoma, serif";
+export const getTheme = (id: string) => THEMES.find(t => t.id === id) ?? THEMES[0];
 
-const escapeXml = (s: string) => s.replace(/[<>&"']/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;", "'": "&#39;" })[c]!);
+export const SANS = "'Thmanyah Sans', Tahoma, Arial, sans-serif";
+export const DISPLAY = "'Thmanyah Serif Display', 'Thmanyah Sans', Tahoma, serif";
+
+export const escapeXml = (s: string) => s.replace(/[<>&"']/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;", "'": "&#39;" })[c]!);
 
 /** Builds the sheet. `fontCss` (embedded @font-face rules) is only needed when rendering to an image. */
 export function buildSheet({ title, habits, days, theme }: SheetOptions, fontCss = ""): Sheet {
-  const C = THEMES.find(t => t.id === theme) ?? THEMES[0];
+  const C = getTheme(theme);
   const landscape = days > 7;
   const width = landscape ? 1123 : 794;
   const height = landscape ? 794 : 1123;
