@@ -1,12 +1,13 @@
 "use client";
 
-import { ArrowUpLeft, GraduationCap, Puzzle, Smartphone, Wrench } from "lucide-react";
+import { ArrowUpLeft, GraduationCap, Monitor, Puzzle, Smartphone, Wrench } from "lucide-react";
 import { useMemo, useState } from "react";
 import { CategoryChips, EmptyState, SearchInput, matches } from "@/components/Filters";
 import type { Tool } from "@/lib/data";
 
 const CATEGORY_ICONS: Record<string, typeof Wrench> = {
   "تطبيق هاتف": Smartphone,
+  "برنامج حاسوب": Monitor,
   "إضافة متصفح": Puzzle,
   "برامج تعليمية": GraduationCap,
 };
