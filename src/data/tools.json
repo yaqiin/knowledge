@@ -3,70 +3,98 @@
     "id": "19944072-55ae-4ceb-bb92-e4363e5df6ff",
     "name": "Quran Tab",
     "description": "هي اضافة لمتصفحات جوجل كروم وفايرفوكس، تهدف هذه الإضافة الى تحويل صفحة التبويب الجديد New Tab في المتصفحات إلى واجهة خاصة بقراءة القرآن الكريم، كما تحوي ميزات عديدة أخرى كعرض أوقات الصلوات.",
-    "link": "https://chromewebstore.google.com/detail/quran-tab/afaihcdgkjebgabomemccdneglknjkdd",
-    "category": "إضافة متصفح"
+    "links": [
+      { "platform": "chrome", "url": "https://chromewebstore.google.com/detail/quran-tab/afaihcdgkjebgabomemccdneglknjkdd" },
+      { "platform": "firefox", "url": "https://addons.mozilla.org/firefox/addon/quran-tab-original/" },
+      { "platform": "edge", "url": "https://microsoftedge.microsoft.com/addons/detail/quran-tab/hnfepfakgcalolgicjdfmaaellnondji" }
+    ],
+    "category": "quran"
   },
   {
     "id": "47ef6b23-0d3a-491a-a6a8-6a36398da5c9",
     "name": "أصبوحة 180",
     "description": "مشروع لصناعة القراء عن طريق استثمار القراءة المنهجية ونواتجها لصناعة مجتمع واع قادر على الوصول للنهضة وتحقيق التنمية مستعينين بالتكنولوجيا الحديثة.",
-    "link": "https://platform.osboha180.com/",
-    "category": "برامج تعليمية"
+    "links": [
+      { "platform": "web", "url": "https://platform.osboha180.com/" }
+    ],
+    "category": "educative-program"
   },
   {
     "id": "24a7807d-47cf-4584-a844-fddc55babf3b",
     "name": "أكاديمية زاد",
     "description": "برنامج تعليمي مدته سنتين، يعلمك مبادئ العلوم الشرعية واللغة العربية وما لا يسع المثقف المسلم المعاصر جهله، من خلال إصدارات احترافية، يشرحها نخبة من أهل الاختصاص، وأنت في بيتك، وأنت في أي مكان.",
-    "link": "https://zad-academy.com/",
-    "category": "برامج تعليمية"
+    "links": [
+      { "platform": "web", "url": "https://zad-academy.com/" }
+    ],
+    "category": "educative-program"
   },
   {
     "id": "4b9c4e4c-1cb4-46e8-9d79-956fcb672eb2",
     "name": "البناء المنهجي",
     "description": "برنامج تعليمي إلكتروني موسمي لطلب العلم الشرعي، يهدف إلى بناء نخب واعدة تجمع بين المعارف الشرعية والفكرية والتزكوية.",
-    "link": "https://t.me/BinaaManhaji",
-    "category": "برامج تعليمية"
+    "links": [
+      { "platform": "telegram", "url": "https://t.me/BinaaManhaji" }
+    ],
+    "category": "educative-program"
   },
   {
     "id": "c1f6a2d8-7e34-4b19-9a5c-2d80e6b73f41",
     "name": "قرآن ديسكتوب",
     "description": "تطبيق لسطح المكتب يعرض مصحف المدينة بخطه الأصلي، مع بحث فوري، وتفسير، ومعاني الكلمات.",
-    "link": "https://quran-desktop.com/",
-    "category": "برنامج حاسوب"
+    "links": [
+      { "platform": "windows", "url": "https://quran-desktop.com/" }
+    ],
+    "category": "quran"
   },
   {
     "id": "03440a7f-773f-4af1-ae6a-eb0083122d2a",
     "name": "أذكار المسلم",
     "description": "تطبيق يقوم إظهار الاذكار والأدعية على الشاشة أثناء تصفحك للهاتف، وبشكل مميز دون الحاجة للدخول الى البرنامج.",
-    "link": "https://play.google.com/store/apps/details?id=com.revanen.athkar",
-    "category": "تطبيق هاتف"
+    "links": [
+      { "platform": "android", "url": "https://play.google.com/store/apps/details?id=com.revanen.athkar" },
+      { "platform": "ios", "url": "https://apps.apple.com/app/id1004470625" }
+    ],
+    "category": "prayer-adhkar"
   },
   {
     "id": "7a325870-8c53-4611-81e7-c602650710e6",
     "name": "القرآن مباشر",
     "description": "تطبيق يوفر تصحيح للتلاوة في الوقت الذي يناسب كل شخص",
-    "link": "https://play.google.com/store/apps/details?id=maknoon.student&hl=ar",
-    "category": "تطبيق هاتف"
+    "links": [
+      { "platform": "android", "url": "https://play.google.com/store/apps/details?id=maknoon.student&hl=ar" },
+      { "platform": "ios", "url": "https://apps.apple.com/app/id1602922387" }
+    ],
+    "category": "quran"
   },
   {
     "id": "5bf83954-458d-40a2-98c7-f59ca3d08f4a",
     "name": "صلاتك",
     "description": "تطبيق مجاني لتذكير المسلمين بأوقات الصلوات اليومية، ويبين أوقات الصلاة لأي منطقة حول العالم، ينبه المستخدمين بمواعيد الصلاة حتى يتمكنوا من أداء الصلوات الخمس في وقتها من دون تأخير من خلال نغمة الأذان في وقت الصلاة.",
-    "link": "https://play.google.com/store/apps/details?id=com.masarat.salati",
-    "category": "تطبيق هاتف"
+    "links": [
+      { "platform": "android", "url": "https://play.google.com/store/apps/details?id=com.masarat.salati" },
+      { "platform": "ios", "url": "https://apps.apple.com/app/id686077611" }
+    ],
+    "category": "prayer-adhkar"
   },
   {
     "id": "81dd0db8-63a2-4694-b658-ab6ee07d70b5",
     "name": "نختم",
     "description": "تطبيق يساعدك على استغلال وقتك بحسنات مثل الجبال، فكلما أردت فتح جوالك عرض عليك آية من كتاب الله من آخر آية وصلت لها. وتستطيع معرفة تفسيرها، وممكن تسمعها بصوت قارئك المفضل.",
-    "link": "https://play.google.com/store/apps/details?id=com.karim.khatma",
-    "category": "تطبيق هاتف"
+    "links": [
+      { "platform": "android", "url": "https://play.google.com/store/apps/details?id=com.karim.khatma" },
+      { "platform": "ios", "url": "https://apps.apple.com/app/id1348796942" }
+    ],
+    "category": "quran"
   },
   {
     "id": "af22b12b-162c-4031-b644-018e270271b4",
     "name": "نُسك",
     "description": "تطبيق نُسك رفيقك الدائم في رحلة النور، حيث يضيئ خطواتك من أول رحلة أداء النسك حتى نهايتها.\nيقدم تطبيق نُسك تجربة رقمية فريدة للزوار، تبدأ من لحظة التخطيط قبل السفر، المغادرة والقدوم والتنقل، حتى الوصول للحرمين الشريفين، و أداء المناسك.",
-    "link": "https://play.google.com/store/apps/details?id=com.moh.nusukapp",
-    "category": "تطبيق هاتف"
+    "links": [
+      { "platform": "android", "url": "https://play.google.com/store/apps/details?id=com.moh.nusukapp" },
+      { "platform": "ios", "url": "https://apps.apple.com/app/id6469515422" },
+      { "platform": "web", "url": "https://www.nusuk.sa/" }
+    ],
+    "category": "hajj-umrah"
   }
 ]

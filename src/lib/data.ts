@@ -1,5 +1,6 @@
 import booksJson from "@/data/books.json";
 import placesJson from "@/data/places.json";
+import toolCategoriesJson from "@/data/tool-categories.json";
 import toolsJson from "@/data/tools.json";
 
 export interface Book {
@@ -24,17 +25,31 @@ export interface Place {
   images: string[];
 }
 
+export interface ToolCategory {
+  id: string;
+  name: string;
+}
+
+export type ToolPlatform = "android" | "ios" | "windows" | "mac" | "linux" | "chrome" | "firefox" | "edge" | "web" | "telegram";
+
+export interface ToolLink {
+  platform: ToolPlatform;
+  url: string;
+}
+
 export interface Tool {
   id: string;
   name: string;
   description: string;
-  link: string;
-  category: string | null;
+  links: ToolLink[];
+  /** A `ToolCategory` id */
+  category: string;
 }
 
 export const books: Book[] = booksJson;
 export const places: Place[] = placesJson;
-export const tools: Tool[] = toolsJson;
+export const toolCategories: ToolCategory[] = toolCategoriesJson;
+export const tools = toolsJson as Tool[];
 
 export function getPlace(slug: string): Place | undefined {
   return places.find(place => place.slug === slug);

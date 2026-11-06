@@ -20,7 +20,8 @@ All content is in `src/data/`:
 |---|---|
 | `books.json` | Library books: title, authors, description, pages, cover URL, download link, categories |
 | `places.json` | Islamic landmarks (المعالم, at `/places/`): `slug` (used in the URL), name, location, Google Maps link, **Markdown** description, images (the first one is the cover) |
-| `tools.json` | Tools: name, description, link, category |
+| `tools.json` | Tools: name, description, `links` (each with a `platform` and a `url`), and `category` (an id from `tool-categories.json`) |
+| `tool-categories.json` | Tool categories: `id`, name |
 | `quran-heart.json` | Shapes of the Quran heart in زادي → محفوظاتي; not meant to be edited by hand |
 
 The habit sheet's suggested habits are in `src/app/zad/habits/presets.ts`.

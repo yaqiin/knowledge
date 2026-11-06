@@ -1,0 +1,6 @@
+[
+  { "id": "quran", "name": "القرآن الكريم" },
+  { "id": "prayer-adhkar", "name": "الصلاة والأذكار" },
+  { "id": "hajj-umrah", "name": "الحج والعمرة" },
+  { "id": "educative-program", "name": "برنامج تعليمي" }
+]
