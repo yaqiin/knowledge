@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { EmptyState, SearchInput, matches } from "@/components/Filters";
+import { FilterSelect } from "@/components/FilterSelect";
+import { EmptyState, FilterBar, SearchInput, matches } from "@/components/Filters";
 import { arabicCount, type Tool, type ToolCategory } from "@/lib/data";
-import { FilterSelect } from "./FilterSelect";
 import { PLATFORMS, PLATFORM_GROUPS, inGroup } from "./platforms";
 import { ToolCard } from "./ToolCard";
 
@@ -35,17 +35,10 @@ export function ToolsBrowser({ tools, categories }: { tools: Tool[]; categories:
 
   return (
     <>
-      {/*
-        Pinned just under the sticky site header (h-16 plus its 1px border, so 65px).
-        From `sm` the whole row is sticky. On phones `contents` dissolves it, so only the dropdowns stay pinned and the search scrolls away.
-      */}
-      <div className="max-sm:contents sm:sticky sm:top-[65px] sm:z-40 sm:-mx-6 sm:flex sm:items-center sm:justify-between sm:gap-3 sm:bg-white/90 sm:px-6 sm:py-3 sm:backdrop-blur-xl">
-        <SearchInput value={query} onChange={setQuery} placeholder="ابحث عن أداة أو منصة..." />
-        <div className="grid shrink-0 grid-cols-2 gap-2 max-sm:sticky max-sm:top-[65px] max-sm:z-40 max-sm:-mx-4 max-sm:mt-2 max-sm:bg-white/90 max-sm:px-4 max-sm:py-2 max-sm:backdrop-blur-xl sm:flex">
-          <FilterSelect label="الموضوع" allLabel="كل المواضيع" options={categories} value={category} onChange={setCategory} />
-          <FilterSelect label="المنصة" allLabel="كل المنصات" options={platformOptions} value={platformGroup} onChange={setPlatformGroup} />
-        </div>
-      </div>
+      <FilterBar search={<SearchInput value={query} onChange={setQuery} placeholder="ابحث عن أداة أو منصة..." />}>
+        <FilterSelect label="الموضوع" allLabel="كل المواضيع" options={categories} value={category} onChange={setCategory} />
+        <FilterSelect label="المنصة" allLabel="كل المنصات" options={platformOptions} value={platformGroup} onChange={setPlatformGroup} />
+      </FilterBar>
 
       {results.length ? (
         <>

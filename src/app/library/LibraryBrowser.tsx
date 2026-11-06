@@ -2,7 +2,8 @@
 
 import { BookOpenText, Download } from "lucide-react";
 import { useMemo, useState } from "react";
-import { CategoryChips, EmptyState, SearchInput, matches } from "@/components/Filters";
+import { FilterSelect } from "@/components/FilterSelect";
+import { EmptyState, FilterBar, SearchInput, matches } from "@/components/Filters";
 import { formatNumber, type Book } from "@/lib/data";
 
 export function LibraryBrowser({ books, categories }: { books: Book[]; categories: string[] }) {
@@ -23,12 +24,17 @@ export function LibraryBrowser({ books, categories }: { books: Book[]; categorie
 
   return (
     <>
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <SearchInput value={query} onChange={setQuery} placeholder="ابحث بعنوان الكتاب أو المؤلف..." />
-        <CategoryChips categories={categories} selected={category} onSelect={setCategory} />
-      </div>
+      <FilterBar search={<SearchInput value={query} onChange={setQuery} placeholder="ابحث بعنوان الكتاب أو المؤلف..." />}>
+        <FilterSelect
+          label="التصنيف"
+          allLabel="كل التصنيفات"
+          options={categories.map(name => ({ id: name, name }))}
+          value={category}
+          onChange={setCategory}
+        />
+      </FilterBar>
 
-      <p className="mt-6 text-sm text-emerald-900/50" aria-live="polite">
+      <p className="mt-4 text-sm text-emerald-900/50" aria-live="polite">
         {results.length} من {books.length}
       </p>
 

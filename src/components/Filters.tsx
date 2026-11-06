@@ -1,6 +1,7 @@
 "use client";
 
 import { Search } from "lucide-react";
+import type { ReactNode } from "react";
 
 export function SearchInput({ value, onChange, placeholder }: {
   value: string;
@@ -22,34 +23,17 @@ export function SearchInput({ value, onChange, placeholder }: {
   );
 }
 
-export function CategoryChips({ categories, selected, onSelect }: {
-  categories: string[];
-  selected: string | null;
-  onSelect: (category: string | null) => void;
-}) {
-  const chip = (label: string, value: string | null) => {
-    const active = selected === value;
-    return (
-      <button
-        key={label}
-        type="button"
-        onClick={() => onSelect(value)}
-        aria-pressed={active}
-        className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition ${
-          active
-            ? "bg-emerald-700 text-white shadow-md shadow-emerald-700/20"
-            : "border border-emerald-900/10 bg-white text-emerald-900/70 hover:border-emerald-300 hover:text-emerald-900"
-        }`}
-      >
-        {label}
-      </button>
-    );
-  };
-
+/**
+ * A search box and dropdowns in one row, pinned just under the sticky site header (h-16 plus its 1px border, so 65px).
+ * From `sm` the whole row is sticky. On phones `contents` dissolves it, so only the dropdowns stay pinned and the search scrolls away.
+ */
+export function FilterBar({ search, children }: { search: ReactNode; children: ReactNode }) {
   return (
-    <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
-      {chip("الكل", null)}
-      {categories.map(category => chip(category, category))}
+    <div className="max-sm:contents sm:sticky sm:top-[65px] sm:z-40 sm:-mx-6 sm:flex sm:items-center sm:justify-between sm:gap-3 sm:bg-white/90 sm:px-6 sm:py-3 sm:backdrop-blur-xl">
+      {search}
+      <div className="grid shrink-0 auto-cols-fr grid-flow-col gap-2 max-sm:sticky max-sm:top-[65px] max-sm:z-40 max-sm:-mx-4 max-sm:mt-2 max-sm:bg-white/90 max-sm:px-4 max-sm:py-2 max-sm:backdrop-blur-xl sm:flex">
+        {children}
+      </div>
     </div>
   );
 }
