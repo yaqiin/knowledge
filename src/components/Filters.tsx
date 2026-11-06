@@ -22,12 +22,10 @@ export function SearchInput({ value, onChange, placeholder }: {
   );
 }
 
-export function CategoryChips({ categories, selected, onSelect, getLabel = category => category }: {
+export function CategoryChips({ categories, selected, onSelect }: {
   categories: string[];
   selected: string | null;
   onSelect: (category: string | null) => void;
-  /** For categories identified by an id rather than their display name */
-  getLabel?: (category: string) => string;
 }) {
   const chip = (label: string, value: string | null) => {
     const active = selected === value;
@@ -51,7 +49,7 @@ export function CategoryChips({ categories, selected, onSelect, getLabel = categ
   return (
     <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
       {chip("الكل", null)}
-      {categories.map(category => chip(getLabel(category), category))}
+      {categories.map(category => chip(category, category))}
     </div>
   );
 }
